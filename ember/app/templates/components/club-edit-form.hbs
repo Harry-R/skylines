@@ -10,6 +10,12 @@
     disabled=saveTask.isRunning}}
 
   {{validated-input
+    value=airport
+    validation=validations.attrs.airport
+    label=(t "airport")
+    disabled=saveTask.isRunning}}
+
+  {{validated-input
     value=website
     validation=validations.attrs.website
     label=(t "website")

@@ -24,6 +24,16 @@ const Validations = buildValidations({
     ],
     debounce: 500,
   },
+  airport: {
+    descriptionKey: 'airport',
+    validators: [
+      validator('presence', {
+        presence: true,
+        ignoreBlank: true,
+      }),
+    ],
+    debounce: 500,
+  },
 });
 
 export default Ember.Component.extend(Validations, {
@@ -52,12 +62,13 @@ export default Ember.Component.extend(Validations, {
 
   saveTask: task(function * () {
     let id = this.get('club.id');
-    let json = this.getProperties('name', 'website');
+    let json = this.getProperties('name', 'website', 'airport');
 
     try {
       yield this.get('ajax').request(`/api/clubs/${id}`, { method: 'POST', json });
       this.set('club.name', json.name);
       this.set('club.website', json.website);
+      this.set('club.airport', json.airport);
       this.get('router').transitionTo('club', id);
 
     } catch (error) {
