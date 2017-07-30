@@ -106,6 +106,9 @@ def update(club_id):
     if 'website' in data:
         club.website = data.get('website')
 
+    if 'airport' in data:
+        club.airport = data.get('airport')
+
     db.session.commit()
 
     return jsonify()

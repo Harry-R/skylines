@@ -23,6 +23,8 @@ class Club(db.Model):
 
     website = db.Column(Unicode(255))
 
+    airport = db.Column(Integer, db.ForeignKey("airports.id", use_alter=True, name="airports.id", ondelete='SET NULL'))
+
     def __unicode__(self):
         return self.name
 
