@@ -117,6 +117,19 @@ export default Ember.Object.extend({
     flights.pushObject(flight);
   },
 
+
+  /**
+   * Remove a flight from map and barogram
+   * @param id  {int} id of flight to remove
+   */
+  removeFlight(id) {
+    let flights = this.get('flights');
+
+    if (flights.findBy('id', id)) {
+      flights.removeObjects(flights.filterBy('id', id));
+    }
+  },
+
   /**
    * Perform a JSON request to get a flight.
    *

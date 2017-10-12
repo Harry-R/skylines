@@ -24,6 +24,8 @@ export default Ember.Component.extend(Validations, {
 
   classNames: ['panel-body'],
 
+  fixCalc: null,
+
   flightId: null,
   models: null,
   modelId: null,
@@ -49,6 +51,13 @@ export default Ember.Component.extend(Validations, {
     try {
       yield this.get('ajax').request(`/api/flights/${id}/`, { method: 'POST', json });
       this.get('onDidSave')();
+
+      let fixCalc = this.get('fixCalc');
+
+      fixCalc.removeFlight(id);
+      fixCalc.addFlightFromJSON(`/api/flights/${id}/json`);
+
+
     } catch (error) {
       this.set('error', error);
     }
